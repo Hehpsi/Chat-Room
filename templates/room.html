@@ -12,31 +12,33 @@
 
     const messages = document.getElementById("messages");
 
-    const createMessage = (name, msg) => {
-        const content = `
-        <div class="text">
-            <span>
-                <strong>${name}</strong>: ${msg}
-            </span>
-            <span class="muted">
-                ${new Date().toLocaleString()}
-            </span>
-        </div>    
-        `;
-        messages.innerHTML += content;
+    const createMessage = (name, msg, isSelf = false) => {
+    const side = isSelf ? 'sent' : 'received';
+    const initials = name.slice(0, 2).toUpperCase();
+    const content = `
+        <div class="text ${side}">
+        <div class="avatar">${initials}</div>
+        <div class="bubble-wrap ${side}">
+            <div class="bubble ${side}">${msg}</div>
+            <span class="muted">${new Date().toLocaleTimeString()}</span>
+        </div>
+        </div>
+    `;
+    messages.innerHTML += content;
+    messages.scrollTop = messages.scrollHeight;
+    };
+
+    const sendMessage = () => {
+    const message = document.getElementById("message");
+    if (message.value === "") return;
+    createMessage("You", message.value, true); // show immediately
+    socketio.emit("message", { data: message.value });
+    message.value = "";
     };
 
     socketio.on("message", (data) => {
-        createMessage(data.name, data.message);
+    createMessage(data.name, data.message, false); // others
     });
-    
-    const sendMessage = () => {
-        const message = document.getElementById("message")
-        if (message.value == "") return;
-        socketio.emit("message", {data: message.value});
-        message.value = ""; 
-
-    };
 </script>
 {% for msg in messages %}
     <script type="text/javascript">
