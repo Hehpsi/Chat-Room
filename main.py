@@ -86,6 +86,17 @@ def message(data):
     rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
 
+@app.route("/leave")
+def leave():
+    room = session.get("room")
+    name = session.get("name")
+    if room and name and room in rooms:
+        rooms[room]["members"] -= 1
+        if rooms[room]["members"] <= 0:
+            del rooms[room]
+    session.clear()
+    return redirect(url_for("home"))
+
 @socketio.on("disconnect")
 def disconnect():
     room = session.get("room")

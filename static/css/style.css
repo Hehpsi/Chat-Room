@@ -55,17 +55,9 @@ body {
 /* Room title header */
 .message-box h2 {
   margin: 0;
-  padding: 0 1.25em;
-  height: 50px;
-  line-height: 50px;
   font-size: 14px;
   font-weight: 600;
   color: #444;
-  text-align: left;
-  border-bottom: 1px solid hsla(0, 0%, 50%, 0.1);
-  background: white;
-  flex-shrink: 0;
-  position: relative;
 }
 
 .message-box h2::after {
@@ -216,6 +208,49 @@ body {
   font-size: 0.9em;
   font-family: inherit;
   font-weight: 600;
+}
+
+/* Exit button */
+.room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25em;
+  height: 50px;
+  border-bottom: 1px solid hsla(0, 0%, 50%, 0.1);
+  background: white;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.room-header::after {
+  position: absolute;
+  content: '';
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: radial-gradient(50% 30% at center top, hsla(0, 0%, 50%, 0.1), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.leave-btn {
+  font-size: 0.8em;
+  font-family: inherit;
+  color: #999;
+  background: none;
+  border: 1px solid #CDCDCA;
+  border-radius: 4px;
+  padding: 0.3em 0.8em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.leave-btn:hover {
+  background: #fdecea;
+  color: #c0392b;
+  border-color: #e0b0ad;
 }
 
 #send-button:hover {
