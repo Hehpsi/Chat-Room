@@ -1,4 +1,4 @@
-# 💬 FlaskChat — Real-Time Chat Rooms
+# 💬 Real-Time Chat Rooms
 
 A lightweight, real-time group chat application built with **Flask** and **Socket.IO**. Users can create or join private chat rooms using a unique code, send messages instantly, and see who enters or leaves — no accounts or sign-up required.
 
